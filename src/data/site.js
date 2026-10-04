@@ -1,5 +1,6 @@
 export const site = {
   name: "Saokee Musor",
+  firstName: "Saokee",
   role: "Junior Full‑Stack Developer",
   location: "Narathiwat, Thailand",
   email: "saokeems@gmail.com",

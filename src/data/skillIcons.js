@@ -1,27 +1,25 @@
 import {
-  Atom,
-  Database,
-  FileCode,
-  FileCode2,
-  GitBranch,
-  Layers,
-  Server,
-  Wind,
-} from "lucide-react";
+  SiCss,
+  SiExpress,
+  SiGit,
+  SiHtml5,
+  SiJavascript,
+  SiMongodb,
+  SiNodedotjs,
+  SiPostgresql,
+  SiReact,
+  SiTailwindcss,
+} from "react-icons/si";
 
 export const skillIcons = {
-  JavaScript: FileCode2,
-  React: Atom,
-  "Node.js": Server,
-  "HTML/CSS": FileCode,
-  Git: GitBranch,
-  "Tailwind CSS": Wind,
-  MongoDB: Database,
-  "Express.js": Layers,
-};
-
-export const pillColors = {
-  React: "bg-sky-400/20 text-sky-300",
-  "Node.js": "bg-green-600/20 text-green-300",
-  MongoDB: "bg-green-500/20 text-green-300",
+  JavaScript: { Icon: SiJavascript, color: "#F7DF1E" },
+  React: { Icon: SiReact, color: "#61DAFB" },
+  "Node.js": { Icon: SiNodedotjs, color: "#5FA04E" },
+  HTML5: { Icon: SiHtml5, color: "#E34F26" },
+  CSS: { Icon: SiCss, color: "#1572B6" },
+  Git: { Icon: SiGit, color: "#F05032" },
+  "Tailwind CSS": { Icon: SiTailwindcss, color: "#06B6D4" },
+  MongoDB: { Icon: SiMongodb, color: "#47A248" },
+  PostgreSQL: { Icon: SiPostgresql, color: "#4169E1" },
+  "Express.js": { Icon: SiExpress, color: "#FFFFFF" },
 };

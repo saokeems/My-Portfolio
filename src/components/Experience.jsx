@@ -2,10 +2,8 @@ import { experiences } from "../data/experiences";
 
 const Experience = () => {
   return (
-    <section id="experience" className="mt-24 flex w-full flex-col">
-      <h2 className="mb-10 text-lg font-bold tracking-widest text-white uppercase">
-        Experience
-      </h2>
+    <section id="experience" className="section shell mt-24">
+      <h2 className="section-title">Experience</h2>
 
       <div className="flex w-full flex-col gap-14">
         {experiences.map((exp) => (
@@ -22,7 +20,11 @@ const Experience = () => {
               <p className="mb-4 text-light-gray">
                 {exp.company} • {exp.type}
               </p>
-              <p className="text-light-gray">{exp.description}</p>
+              <ul className="flex flex-col gap-2 text-light-gray">
+                {exp.description.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
             </div>
           </div>
         ))}
