@@ -1,42 +1,81 @@
-import { useState, useEffect } from "react";
-
-const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Projects", href: "#projects" },
-  { label: "Experience", href: "#experience" },
-  { label: "Education", href: "#education" },
-];
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
+import { site, navLinks } from "../data/site";
 
 const Navbar = () => {
-  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 100);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const goTo = (event, href) => {
+    event.preventDefault();
+    document
+      .querySelector(href)
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    setOpen(false);
+  };
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 hidden md:block transition-all duration-300 ${
-        scrolled ? "bg-white/80 backdrop-blur-sm" : ""
-      }`}
-    >
-      <nav className="max-w-7xl mx-auto px-8 py-4">
-        <ul className="flex items-center gap-8 justify-center">
+    <header className="w-full pt-5 pb-10">
+      <nav className="flex w-full items-center justify-between">
+        <a
+          href="#hero"
+          onClick={(event) => goTo(event, "#hero")}
+          className="text-lg font-bold tracking-widest text-light-gray uppercase transition-colors hover:text-white"
+        >
+          {site.name}
+        </a>
+
+        <div className="hidden items-center gap-6 text-lg text-light-gray lg:flex">
           {navLinks.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className="text-gray-700 hover:text-black transition-colors font-medium"
-              >
-                {link.label}
-              </a>
-            </li>
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={(event) => goTo(event, link.href)}
+              className="transition-colors hover:text-white"
+            >
+              {link.label}
+            </a>
           ))}
-        </ul>
+        </div>
+
+        <div className="hidden max-lg:flex">
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            aria-label="Open menu"
+            aria-expanded={open}
+            className="text-white"
+          >
+            <Menu className="h-7 w-7" />
+          </button>
+
+          <div
+            className={`fixed inset-y-0 left-0 z-50 flex w-full flex-col bg-dark-bg px-6 py-11 transition-transform duration-300 ease-in-out ${
+              open ? "translate-x-0" : "-translate-x-full"
+            }`}
+          >
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              aria-label="Close menu"
+              className="self-end text-white"
+            >
+              <X className="h-7 w-7" />
+            </button>
+            <ul className="mt-32 flex flex-col gap-5 text-center text-3xl font-semibold text-light-gray">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    onClick={(event) => goTo(event, link.href)}
+                    className="transition-colors hover:text-white"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </nav>
     </header>
   );

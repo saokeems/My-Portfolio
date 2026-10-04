@@ -1,54 +1,51 @@
-import { Mail } from "lucide-react";
+import BrandIcon from "./BrandIcon";
+import { site } from "../data/site";
 import { socialLinks } from "../data/socialLinks";
 
 const Hero = () => {
+  const firstName = site.name.split(" ")[0];
+
   return (
     <section
       id="hero"
-      className="relative isolate overflow-hidden bg-white py-24 md:h-screen"
-      style={{ "--accent-color": "#1d4ed8" }}
+      className="flex items-center gap-10 pt-16 pb-20 max-lg:flex-col max-lg:gap-6 max-lg:text-center"
     >
-      {/* Gradient overlay */}
-      <div
-        className="absolute inset-0 -z-10"
-        style={{
-          background:
-            "radial-gradient(ellipse 800px 1200px at 0% 0%, #1d4ed840 0%, #1d4ed825 20%, #1d4ed810 40%, rgba(255, 255, 255, 0.3) 70%, rgba(255, 255, 255, 0.8) 90%, white 100%)",
-        }}
-      />
+      <div className="relative h-44 w-44 min-h-44 min-w-44 shrink-0 overflow-hidden rounded-full">
+        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-orange-500 via-red-500 to-purple-500 p-1">
+          <div className="h-full w-full overflow-hidden rounded-full bg-dark-bg">
+            <img
+              src={site.avatar}
+              alt={site.name}
+              width="170"
+              height="170"
+              className="h-full w-full rounded-full border-white border-4 object-cover"
+            />
+          </div>
+        </div>
+      </div>
 
-      <div className="h-full mx-auto p-8 sm:p-12 md:p-24 flex items-center">
-        <div>
-          <h2 className="text-pretty text-xl sm:text-2xl md:text-5xl font-bold tracking-tight text-gray-700 animate-fade-in">
-            Hello! 👋
-          </h2>
-          <h1 className="mt-6 sm:mt-8 md:mt-10 text-pretty text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold tracking-tight text-gray-800 animate-fade-in animation-delay-200">
-            I'm <span style={{ color: "#1d4ed8" }}>Saokee Musor</span>
-          </h1>
-          <p className="mt-4 sm:mt-6 md:mt-8 text-pretty text-base sm:text-lg md:text-xl/8 font-medium text-gray-600 animate-fade-in animation-delay-400">
-            Junior Full-Stack Developer
-          </p>
-          {/* Social icons */}
-          <div className="mt-8 sm:mt-10 md:mt-12 flex gap-x-4 sm:gap-x-6 md:gap-x-8 text-gray-700 animate-fade-in animation-delay-600">
+      <div className="flex w-full flex-col items-start gap-6 max-lg:items-center">
+        <h1 className="text-[28px] font-bold tracking-[0.03em] text-balance text-light-gray">
+          <span className="text-white">Hey, I'm {firstName}. </span>
+          I'm a {site.role}
+        </h1>
+
+        <div className="flex w-full items-center justify-between gap-3 max-lg:flex-col">
+          <span className="whitespace-nowrap text-light-gray">
+            📍 {site.location}
+          </span>
+
+          <div className="flex w-full items-center justify-end gap-5 text-base text-light-gray max-lg:justify-center">
             {socialLinks.map((link) => (
               <a
                 key={link.id}
                 href={link.href}
-                target={link.target}
-                rel={link.rel}
-                aria-label={link.label}
-                className="transition-colors duration-300 hover:text-[var(--accent-color)]"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 transition-colors hover:text-white"
               >
-                {link.type === "lucide" ? (
-                  <Mail className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8" />
-                ) : (
-                  <svg
-                    className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <use href={link.hrefIcon} />
-                  </svg>
-                )}
+                <BrandIcon name={link.icon} className="h-5 w-5" />
+                {link.label}
               </a>
             ))}
           </div>
